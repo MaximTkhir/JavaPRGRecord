@@ -1,0 +1,50 @@
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Testic {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            FileWriter fileWriter = new FileWriter("students.txt", true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            System.out.print("Введите количество студентов: ");
+            int numberOfStudents = scanner.nextInt();
+            scanner.nextLine();
+
+            for (int i = 0; i < numberOfStudents; i++) {
+                System.out.println("\nВведи инфу о студенте " + (i + 1) + ":");
+
+                System.out.print("Имя: ");
+                String name = scanner.nextLine();
+
+                System.out.print("Возраст: ");
+                int age = scanner.nextInt();
+                scanner.nextLine();
+
+                System.out.print("Средний балл: ");
+                double averageGrade = scanner.nextDouble();
+                scanner.nextLine();
+                bufferedWriter.write("Имя: " + name + ", Возраст: " + age + ", Средний балл: " + averageGrade);
+                bufferedWriter.newLine();
+            }
+
+            bufferedWriter.write("by Maxim Tkhir. M.T");
+            bufferedWriter.newLine();
+
+            System.out.println("\nПолучилось! Информация записалась в файлик students.txt");
+
+            bufferedWriter.close();
+            fileWriter.close();
+
+        } catch (IOException e) {
+            System.err.println("Что-то пошло не так при записи в файл: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+}
